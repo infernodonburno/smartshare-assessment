@@ -39,18 +39,18 @@ public final class Api {
     		 StringWriter stringWriter = new StringWriter();
      		 marshaller.marshal(downloadRequestDto, stringWriter);
      		 
-     		BufferedWriter out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-    		out.write(stringWriter.toString());
-    		out.newLine();
-    		out.flush();
+     		 BufferedWriter out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+    		 out.write(stringWriter.toString());
+    		 out.newLine();
+    		 out.flush();
     		
-    		BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-    		StringReader stringReader = new StringReader(input.readLine());
+    		 BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+    		 StringReader stringReader = new StringReader(input.readLine());
     		
-    		Unmarshaller unmarshaller = context.createUnmarshaller();
-			DownloadDto downloadDto = (DownloadDto) unmarshaller.unmarshal(stringReader);
+    		 Unmarshaller unmarshaller = context.createUnmarshaller();
+			 DownloadDto downloadDto = (DownloadDto) unmarshaller.unmarshal(stringReader);
 			
-			return downloadDto.getFileSize() != null;
+			 return downloadDto.getFileSize() != null;
     		 
         }catch(IOException | JAXBException e) {
         	
@@ -70,21 +70,21 @@ public final class Api {
     public static boolean upload(UploadingDto uploadRequestDto) {
     	
     	try (Socket socket = new Socket(HOST, PORT)) {
-   		 JAXBContext context = JAXBContext.newInstance(UploadingDto.class);
-   		 Marshaller marshaller = context.createMarshaller();
+   		 	 JAXBContext context = JAXBContext.newInstance(UploadingDto.class);
+   		 	 Marshaller marshaller = context.createMarshaller();
    		 
-   		 StringWriter stringWriter = new StringWriter();
-         marshaller.marshal(uploadRequestDto, stringWriter);
+   		 	 StringWriter stringWriter = new StringWriter();
+        	 marshaller.marshal(uploadRequestDto, stringWriter);
     		 
-         BufferedWriter out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-   		 out.write(stringWriter.toString());
-   		 out.newLine();
-   		 out.flush();
+        	 BufferedWriter out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+        	 out.write(stringWriter.toString());
+        	 out.newLine();
+        	 out.flush();
    		 
-   		 DataInputStream in = new DataInputStream(socket.getInputStream());
+        	 DataInputStream in = new DataInputStream(socket.getInputStream());
 		
-   		 //return if non zero (1)
-		 return in.readBoolean();
+        	 //return if non zero (1)
+        	 return in.readBoolean();
    		 
          }catch(IOException | JAXBException e) {
        	
@@ -106,19 +106,19 @@ public final class Api {
     public static long[] view(ViewRequestDto viewing) {
     	
     	try (Socket socket = new Socket(HOST, PORT)) {
-   		 JAXBContext context = JAXBContext.newInstance(ViewRequestDto.class);
-   		 Marshaller marshaller = context.createMarshaller();
+   		 	JAXBContext context = JAXBContext.newInstance(ViewRequestDto.class);
+   		 	Marshaller marshaller = context.createMarshaller();
    		 
-   		 StringWriter stringWriter = new StringWriter();
-         marshaller.marshal(viewing, stringWriter);
+   		 	StringWriter stringWriter = new StringWriter();
+   		 	marshaller.marshal(viewing, stringWriter);
     		 
-    	 BufferedWriter out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
-   		 out.write(stringWriter.toString());
-   		 out.newLine();
-   		 out.flush();
+   		 	BufferedWriter out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+   		 	out.write(stringWriter.toString());
+   		 	out.newLine();
+   		 	out.flush();
 		
-		 long[] time = {viewing.getCreationTime(), viewing.getExpireTime()};
-		 return time;
+   		 	long[] time = {viewing.getCreationTime(), viewing.getExpireTime()};
+   		 	return time;
    		 
        }catch(IOException | JAXBException e) {
        	
