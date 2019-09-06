@@ -116,14 +116,8 @@ public final class Api {
    		 out.write(stringWriter.toString());
    		 out.newLine();
    		 out.flush();
-   		
-   		 BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-   		 StringReader stringReader = new StringReader(input.readLine());
-   		 
-   		 Unmarshaller unmarshaller = context.createUnmarshaller();
-		 ViewRequestDto viewer = (ViewRequestDto) unmarshaller.unmarshal(stringReader);
 		
-		 long[] time = {viewer.getCreationTime(), viewer.getExpireTime()};
+		 long[] time = {viewing.getCreationTime(), viewing.getExpireTime()};
 		 return time;
    		 
        }catch(IOException | JAXBException e) {
