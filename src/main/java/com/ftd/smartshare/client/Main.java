@@ -1,12 +1,15 @@
 package com.ftd.smartshare.client;
 
 import com.ftd.smartshare.client.commands.SmartShare;
+import com.ftd.smartshare.dao.FileDao;
+import com.ftd.smartshare.dao.Filing;
+
 import picocli.CommandLine;
 
 class Main {
 
     public static void main(String[] args) {
-        CommandLine.run(new SmartShare()); // Pass cli arguments here
+          CommandLine.run(new SmartShare()); // Pass cli arguments here
 //        CommandLine.run(new SmartShare(), "-h");
 //        CommandLine.run(new SmartShare(), "--version");
 //        CommandLine.run(new SmartShare(), "upload");
@@ -21,6 +24,7 @@ class Main {
 //        CommandLine.run(new SmartShare(), "upload", "pom.xml", "password", "-m", "1");
 //        CommandLine.run(new SmartShare(), "download", "pom.xml", "password");
 //        CommandLine.run(new SmartShare(), "download", "pom.xml", "password");
+       
         
     }
 
